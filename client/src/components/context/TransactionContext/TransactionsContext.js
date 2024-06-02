@@ -4,7 +4,6 @@ import {
   TRANSACTION_CREATION_SUCCESS,
   TRANSACTION_CREATION_FAIL,
 } from "./transactionsActionTypes";
-import { API_URL_TRANSACTION } from "../../../utils/apiURL";
 
 export const transactionContext = createContext();
 
@@ -50,7 +49,11 @@ export const TransactionContextProvider = ({ children }) => {
         },
       };
       //request
-      const res = await axios.post(API_URL_TRANSACTION, accountData, config);
+      const res = await axios.post(
+        process.env.REACT_APP_API_URL_TRANSACTION,
+        accountData,
+        config
+      );
       if (res?.data?.status === "success") {
         dispatch({ type: TRANSACTION_CREATION_SUCCESS, payload: res?.data });
       }

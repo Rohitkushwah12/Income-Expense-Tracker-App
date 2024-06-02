@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL_USER } from "../../../utils/apiURL";
+
 import {
   LOGIN_FAILED,
   LOGIN_SUCCESS,
@@ -98,7 +98,12 @@ const AuthContextProvider = ({ children }) => {
       },
     };
     try {
-      const res = await axios.post(`${API_URL_USER}/login`, FormData, config);
+      console.log(process.env.REACT_APP_API_URL_USER);
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL_USER}/login`,
+        FormData,
+        config
+      );
       if (res?.data?.status === "success") {
         dispatch({
           type: LOGIN_SUCCESS,
@@ -124,7 +129,7 @@ const AuthContextProvider = ({ children }) => {
     };
     try {
       const res = await axios.post(
-        `${API_URL_USER}/register`,
+        `${process.env.REACT_APP_API_URL_USER}/register`,
         FormData,
         config
       );
@@ -153,7 +158,10 @@ const AuthContextProvider = ({ children }) => {
       },
     };
     try {
-      const res = await axios.get(`${API_URL_USER}/profile`, config);
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL_USER}/profile`,
+        config
+      );
 
       if (res?.data?.status === "success") {
         dispatch({

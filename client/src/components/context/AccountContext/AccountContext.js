@@ -1,5 +1,4 @@
 import axios from "axios";
-import { API_URL_ACC } from "../../../utils/apiURL";
 import {
   ACCOUNT_DETAILS_SUCCESS,
   ACCOUNT_DETAILS_FAIL,
@@ -69,7 +68,11 @@ export const AccountContextProvider = ({ children }) => {
     };
 
     try {
-      const res = await axios.post(`${API_URL_ACC}`, formData, config);
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_URL_ACC}`,
+        formData,
+        config
+      );
       if (res?.data?.status === "success") {
         //dispatch
         dispatch({
@@ -97,7 +100,10 @@ export const AccountContextProvider = ({ children }) => {
     };
 
     try {
-      const res = await axios.get(`${API_URL_ACC}/${id}`, config);
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL_ACC}/${id}`,
+        config
+      );
       if (res?.data?.status === "success") {
         //dispatch
         dispatch({
